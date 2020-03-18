@@ -1,0 +1,5 @@
+USE CuatroCuadras
+
+GO
+
+SELECT * FROM VISITA

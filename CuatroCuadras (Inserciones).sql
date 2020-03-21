@@ -99,27 +99,27 @@ INSERT INTO AMIGO VALUES
         ('Estadios');
 
 INSERT INTO LUGAR VALUES
-    ('Estadio Tomateros','24.7777','-107.389457','Estadio de Beisbol',10,16,15),
-    ('Sams Club 3 Rios','24.1373','-107.412717','Tienda de Mayoreo',8,7,4),
-    ('Fühler','24.802018','-107.397176','Centro de Ocio',7,1,6),
-    ('Taipak MonteCarlo','24.817548','-107.423411','Restaurante de Comida Asiatica',9,4,4),
-    ('Estadio Teodoro Mariscal','23.236318','-106.430799','Estadio de Beisbol',8,16,15),
-    ('Soriana Hiper','23.237284','-106.419963','Supermercado',8,7,13),
-    ('KFC Insurgentes','23.234386','-106.419963','Restaurante de Pollo Frito',6,4,25),
-    ('Panamá Insurgentes','23.216738','-106.416530','Restaurante Regional',10,4,4),
-    ('Pemex','23.207074','-106.411401','Gasolineria',5,15,29),
-    ('Farmacia Guadalajara','25.821725','-109.001043','Super-Farmacia',8,6,26),
-    ('Parque Sinaloa','25.788361','-109.002049','Parque Familiar',10,9,28),
-    ('Ley Primavera','24.763375','-107.699523','Supermercado Regional',8,7,8),
-    ('USE Navolato','24.7577050','-107.694008','Oficinas de Gobierno',9,5,17),
-    ('Cinemex Navolato','25.569533','-108.46567','Sucursal de Cine',5,3,2),
-    ('Banbajío','25.571111','-108.464483','Sucursal Bancaria',4,12,13),
-    ('MUSIK','20.669706','-103.346863','Tienda de Musica',3,2,19),
-    ('Zona de Vestir Medrano','20.670730','-103.341363','Tienda de Ropa',6,11,20),
-    ('Aeropuerto Internacional de Tijuana','32.541651','-116.974962','Aeropuerto Internacional',9,10,9),
-    ('Hospital Ángeles','32.518155','-117.007258','Hospital Privado',10,8,5),
-    ('Sears Plaza Rio','32.527653','-117.021206','Tienda Departamental',9,13,18),
-    ('The Barber Shop','32.521646','-117.026613','Barberia Profesional',8,14,22);
+    ('Estadio Tomateros','24.7777','-107.389457','Estadio de Beisbol',16,15),
+    ('Sams Club 3 Rios','24.1373','-107.412717','Tienda de Mayoreo',7,4),
+    ('Fühler','24.802018','-107.397176','Centro de Ocio',1,6),
+    ('Taipak MonteCarlo','24.817548','-107.423411','Restaurante de Comida Asiatica',4,4),
+    ('Estadio Teodoro Mariscal','23.236318','-106.430799','Estadio de Beisbol',16,15),
+    ('Soriana Hiper','23.237284','-106.419963','Supermercado',7,13),
+    ('KFC Insurgentes','23.234386','-106.419963','Restaurante de Pollo Frito',4,25),
+    ('Panamá Insurgentes','23.216738','-106.416530','Restaurante Regional',4,4),
+    ('Pemex','23.207074','-106.411401','Gasolineria',15,29),
+    ('Farmacia Guadalajara','25.821725','-109.001043','Super-Farmacia',6,26),
+    ('Parque Sinaloa','25.788361','-109.002049','Parque Familiar',9,28),
+    ('Ley Primavera','24.763375','-107.699523','Supermercado Regional',7,8),
+    ('USE Navolato','24.7577050','-107.694008','Oficinas de Gobierno',5,17),
+    ('Cinemex Navolato','25.569533','-108.46567','Sucursal de Cine',3,2),
+    ('Banbajío','25.571111','-108.464483','Sucursal Bancaria',12,13),
+    ('MUSIK','20.669706','-103.346863','Tienda de Musica',2,19),
+    ('Zona de Vestir Medrano','20.670730','-103.341363','Tienda de Ropa',11,20),
+    ('Aeropuerto Internacional de Tijuana','32.541651','-116.974962','Aeropuerto Internacional',10,9),
+    ('Hospital Ángeles','32.518155','-117.007258','Hospital Privado',8,5),
+    ('Sears Plaza Rio','32.527653','-117.021206','Tienda Departamental',13,18),
+    ('The Barber Shop','32.521646','-117.026613','Barberia Profesional',14,22);
 
 
     INSERT INTO VISITA VALUES 

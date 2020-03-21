@@ -10,7 +10,6 @@ CREATE TABLE LUGAR(
     Latitud VARCHAR(20) NOT NULL,
     Longitud VARCHAR(20) NOT NULL,
     Descripcion VARCHAR(30) NOT NULL,
-    Valoracion TINYINT NOT NULL,
     ID_Categoria INT NOT NULL,
     ID_Etiqueta INT NOT NULL
 )

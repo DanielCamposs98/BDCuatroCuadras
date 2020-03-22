@@ -42,19 +42,23 @@ GO
     ('Tijuana');
 
 INSERT INTO USUARIO VALUES
-    ('XxXGokuXxX','Juan','Perez Perez','M','XxXGokuSSJXxX@hotmail.com','ContraseñaDeLaCIA',4),
-    ('Diana129','Diana','Aispuro Angulo','F','DianaAisAng@hotmail.com','DianAisPAnG',2),
-    ('CuentaFeik','Jose Luis','Sanchez Rodriguez','M','CuentaFakeParaApps@outlook.com','NoSoyFeik123',3),
-    ('Luiz','Luis','Lopez Lopez','M','LuisLopezAlCuadrado@hotmail.com','LopezAlCuadrado',1),
-    ('Emilian99','Emiliano','Paez Lopez','M','PaezLopEmiliano@outlook.com','LopezPaezEmil9912',2),
-    ('JoseCarl','Jose Carlos','Ventura Gararte','M','JoseCarlos123@hotmail.com','JoseCarlGararVen',1),
-    ('Mari','Maria Elena','Perez Sarrion','F','MariElen@hotmail.com','12Mari34Elen56aa78',7),
-    ('AnaALV','Ana Maria','Alvarez Castelo','F','MarianaALV@hotmail.com','MariAnaLV1582',6),
-    ('SandCast','Sandra','Flores Castilla','F','SandraCast@hotmail.com','Sandra1235',4),
-    ('Coronavirus','Angel','Gomez Bravo','M','CoronaPandamiaVirus@hotmail.com','AntiVacunas2020',6),
-    ('Angel224','Angel','Torres Gomez','M','AngelTG24@gmail.com','OsiContraseña',5),
-    ('MenitaXD98','Ximena','Castro Yepez','F','menaCY@hotmail.com','menittha98',5),
-    ('Panchogo94','Francisco','Moreno Lopez','M','PanchoGpi45@live.com.mx','panchito99',1);
+    ('XxXGokuXxX','Juan','Perez Perez','M',14,'XxXGokuSSJXxX@hotmail.com','ContraseñaDeLaCIA',4),
+    ('Diana129','Diana','Aispuro Angulo','F',24,'DianaAisAng@hotmail.com','DianAisPAnG',2),
+    ('CuentaFeik','Jose Luis','Sanchez Rodriguez','M',21,'CuentaFakeParaApps@outlook.com','NoSoyFeik123',3),
+    ('Luiz','Luis','Lopez Lopez','M',30,'LuisLopezAlCuadrado@hotmail.com','LopezAlCuadrado',1),
+    ('Emilian99','Emiliano','Paez Lopez','M',50,'PaezLopEmiliano@outlook.com','LopezPaezEmil9912',2),
+    ('JoseCarl','Jose Carlos','Ventura Gararte','M',54,'JoseCarlos123@hotmail.com','JoseCarlGararVen',1),
+    ('Mari','Maria Elena','Perez Sarrion','F',38,'MariElen@hotmail.com','12Mari34Elen56aa78',7),
+    ('AnaALV','Ana Maria','Alvarez Castelo','F',26,'MarianaALV@hotmail.com','MariAnaLV1582',6),
+    ('SandCast','Sandra','Flores Castilla','F',16,'SandraCast@hotmail.com','Sandra1235',4),
+    ('Coronavirus','Angel','Gomez Bravo','M',19,'CoronaPandamiaVirus@hotmail.com','AntiVacunas2020',6),
+    ('Angel224','Angel','Torres Gomez','M',46,'AngelTG24@gmail.com','OsiContraseña',5),
+    ('MenitaXD98','Ximena','Castro Yepez','F',31,'menaCY@hotmail.com','menittha98',5),
+    ('Panchogo94','Francisco','Moreno Lopez','M',20,'PanchoGpi45@live.com.mx','panchito99',1),
+	('MigueMF', 'Miguel', 'Mendoza Fernandez', 'M', 23, 'miguemf@gmail.com', 'migmenfer97', 3),
+	('RamLop99', 'Ramon', 'Lopez Perez', 'M', 21, 'ramonlopez99@yahoo.com.mx', 'rammaster99', 7),
+	('GabiLuna', 'Gabriela', 'Luna Sanchez', 'F', 17, 'gabilusanxyz15@outlook.com', 'gabimoon15', 1),
+	('AlizV5', 'Alicia', 'Valenzuela Navarro', 'F', 29, 'alizzv12@outlook.com','navaliz91', 6);
 
 INSERT INTO LOGRO VALUES   
     ('Fotogenico','Check-In en 3 lugares distintos con fotocabina (photoboot)'),
@@ -78,7 +82,10 @@ INSERT INTO AMIGO VALUES
     ('Angel224','Diana129'),
     ('JoseCarl','MenitaXD98'),
     ('SandCast','Panchogo94'),
-     ('Panchogo94','CuentaFeik');
+    ('Panchogo94','CuentaFeik'),
+	('MigueMF', 'AlizV5'),
+	('GabiLuna', 'RamLop99'),
+	('RamLop99', 'AnaALV');
 
      INSERT INTO CATEGORIA VALUES    
         ('Karaoke Bar'),
@@ -99,30 +106,30 @@ INSERT INTO AMIGO VALUES
         ('Estadios');
 
 INSERT INTO LUGAR VALUES
-    ('Estadio Tomateros','24.7777','-107.389457','Estadio de Beisbol',16,15),
-    ('Sams Club 3 Rios','24.1373','-107.412717','Tienda de Mayoreo',7,4),
-    ('Fühler','24.802018','-107.397176','Centro de Ocio',1,6),
-    ('Taipak MonteCarlo','24.817548','-107.423411','Restaurante de Comida Asiatica',4,4),
-    ('Estadio Teodoro Mariscal','23.236318','-106.430799','Estadio de Beisbol',16,15),
-    ('Soriana Hiper','23.237284','-106.419963','Supermercado',7,13),
-    ('KFC Insurgentes','23.234386','-106.419963','Restaurante de Pollo Frito',4,25),
-    ('Panamá Insurgentes','23.216738','-106.416530','Restaurante Regional',4,4),
-    ('Pemex','23.207074','-106.411401','Gasolineria',15,29),
-    ('Farmacia Guadalajara','25.821725','-109.001043','Super-Farmacia',6,26),
-    ('Parque Sinaloa','25.788361','-109.002049','Parque Familiar',9,28),
-    ('Ley Primavera','24.763375','-107.699523','Supermercado Regional',7,8),
-    ('USE Navolato','24.7577050','-107.694008','Oficinas de Gobierno',5,17),
-    ('Cinemex Navolato','25.569533','-108.46567','Sucursal de Cine',3,2),
-    ('Banbajío','25.571111','-108.464483','Sucursal Bancaria',12,13),
-    ('MUSIK','20.669706','-103.346863','Tienda de Musica',2,19),
-    ('Zona de Vestir Medrano','20.670730','-103.341363','Tienda de Ropa',11,20),
-    ('Aeropuerto Internacional de Tijuana','32.541651','-116.974962','Aeropuerto Internacional',10,9),
-    ('Hospital Ángeles','32.518155','-117.007258','Hospital Privado',8,5),
-    ('Sears Plaza Rio','32.527653','-117.021206','Tienda Departamental',13,18),
-    ('The Barber Shop','32.521646','-117.026613','Barberia Profesional',14,22);
+    ('Estadio Tomateros','24.7777','-107.389457','Estadio de Beisbol',1,16,15),
+    ('Sams Club 3 Rios','24.1373','-107.412717','Tienda de Mayoreo',1,7,4),
+    ('Fühler','24.802018','-107.397176','Centro de Ocio',1,1,6),
+    ('Taipak MonteCarlo','24.817548','-107.423411','Restaurante de Comida Asiatica',1,4,4),
+    ('Estadio Teodoro Mariscal','23.236318','-106.430799','Estadio de Beisbol',3,16,15),
+    ('Soriana Hiper','23.237284','-106.419963','Supermercado',3,7,13),
+    ('KFC Insurgentes','23.234386','-106.419963','Restaurante de Pollo Frito',3,4,25),
+    ('Panamá Insurgentes','23.216738','-106.416530','Restaurante Regional',3,4,4),
+    ('Pemex','23.207074','-106.411401','Gasolineria',3,15,23),
+    ('Farmacia Guadalajara','25.821725','-109.001043','Super-Farmacia',4,6,26),
+    ('Parque Sinaloa','25.788361','-109.002049','Parque Familiar',4,9,28),
+    ('Ley Primavera','24.763375','-107.699523','Supermercado Regional',2,7,8),
+    ('USE Navolato','24.7577050','-107.694008','Oficinas de Gobierno',2,5,17),
+    ('Cinemex Navolato','25.569533','-108.46567','Sucursal de Cine',2,3,2),
+    ('Banbajío','25.571111','-108.464483','Sucursal Bancaria',5,12,13),
+    ('MUSIK','20.669706','-103.346863','Tienda de Musica',6,2,19),
+    ('Zona de Vestir Medrano','20.670730','-103.341363','Tienda de Ropa',6,11,20),
+    ('Aeropuerto Internacional de Tijuana','32.541651','-116.974962','Aeropuerto Internacional',7,10,9),
+    ('Hospital Ángeles','32.518155','-117.007258','Hospital Privado',7,8,5),
+    ('Sears Plaza Rio','32.527653','-117.021206','Tienda Departamental',7,13,18),
+    ('The Barber Shop','32.521646','-117.026613','Barberia Profesional',7,14,22);
 
 
-    INSERT INTO VISITA VALUES 
+    INSERT INTO VISITA (ID_Lugar, Nickname, Comentario, Valoracion, Fecha) VALUES  
     (9,'JoseCarl','Excelente',10,'Mar 20 2018 3:12 AM'),
     (2,'XxXGokuXxX','Bueno',6,'Dec 28 2019 4:28 PM'),
     (17,'Luiz','Regular',7,'Jan 20 2020 7:30 AM'),
@@ -154,7 +161,7 @@ INSERT INTO LUGAR VALUES
     (8,'SandCast','Bueno',8,'Jul 18 2019 11:20 AM'),
     (19,'Coronavirus','Muy Malo',2,'Apr 20 2018 03:20 PM'),
     (20,'AnaALV','Muy Bueno',9,'Mar 10 2020 05:28 PM'),
-    (13,'Emilian99','Excelente',10,'Oct 29 2019 03:45 PM'),
+    (13,'Emilian99','regular',10,'Oct 29 2019 03:45 PM'),
     (9,'Diana129','Bueno',8,'Nov 01 2018 03:59 PM'),
     (8,'SandCast','Malo',4,'Feb 20 2020 12:30 AM'),
     (12,'Mari','Excelente',10,'Jul 15 2018 04:20 PM'),
@@ -172,7 +179,27 @@ INSERT INTO LUGAR VALUES
     (12,'Emilian99','Muy Bueno',9,'May 23 2018 01:45 PM'),
     (5,'CuentaFeik','Excelente',10,'May 12 2019 12:20 AM'),
     (6,'Diana129','Regular',6,'Sep 20 2019 06:45 PM'),
-    (2,'XxXGokuXxX','Muy Malo',1,'Mar 12 2020 01:26 PM');
+    (2,'XxXGokuXxX','Muy Malo',1,'Mar 12 2020 01:26 PM'),
+	(3, 'GabiLuna', NULL, 5, 'Feb 20 2018 03:25 PM'),
+	(10, 'AlizV5', 'Excelente', 10, 'Sep 13 2019 11:55 AM'),
+	(2, 'AlizV5', NULL, 8, 'May 10 2019 05:30 PM'),
+	(11, 'MigueMF', 'Malo', 4, 'Feb 22 2020 04:55 PM'),
+	(13, 'Coronavirus', NULL, 7, 'Oct 14 2019 08:44 PM'), 
+	(12, 'SandCast', 'Muy bueno', 8, 'Nov 23 2019 05:23 PM'),
+	(4, 'AnaALV', 'Regular', 7, 'Nov 23 2019 04:54 PM'),
+	(7, 'Diana129', NULL, 2, 'Sep 23 2018 08:38 PM'),
+	(10, 'MigueMF', NULL, 8, 'Sep 13 2019 11:55 AM'),
+	(10, 'Emilian99', 'Bueno', 8, 'Jan 23 2020 10:20 AM'),
+	(5, 'Emilian99', NULL, 1, 'Jan 23 2019 12:43 AM'),
+	(2, 'Mari', 'Regular', 5, 'Dec 23 2019 05:33 PM'),
+	(11, 'MigueMF', 'Bueno', 8, 'Mar 01 2018 07:23 AM'),
+	(9, 'Luiz', 'Bueno', 8, 'Dec 05 2019 01:50 PM'),
+	(16, 'Diana129', NULL, 5, 'Sep 25 2018 03:49 PM'),
+	(20, 'CuentaFeik', NULL, 9, 'Mar 03 2020 12:04 PM'),
+	(5, 'Mari', 'Muy bueno', 9, 'Apr 10 2018 08:29 PM'),
+	(4, 'MigueMF', NULL, 6, 'Apr 23 2019 07:55 PM'),
+	(6, 'GabiLuna', 'Bueno', 7, 'May 23 2019 05:44 PM'),
+	(16, 'XxXGokuXxX', NULL, 10, 'Nov 14 2019 06:04 PM');
 
     INSERT INTO LOGRO_USUARIO VALUES
     ('Coronavirus',5,'Jan 31 2020 08:15 PM'),

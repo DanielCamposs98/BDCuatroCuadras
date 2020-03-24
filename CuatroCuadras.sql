@@ -28,7 +28,7 @@ CREATE TABLE LUGAR(
     Nombre VARCHAR(45) NOT NULL,
     Latitud VARCHAR(20) NOT NULL,
     Longitud VARCHAR(20) NOT NULL,
-    Descripcion VARCHAR(30) NOT NULL,
+    Descripcion VARCHAR(100) NOT NULL,
     ID_Ciudad INT NOT NULL,
     ID_Categoria INT NOT NULL,
     ID_Etiqueta INT NOT NULL
@@ -40,9 +40,9 @@ CREATE TABLE USUARIO(
     Nombre VARCHAR(40) NOT NULL,
     Apellidos VARCHAR(50) NOT NULL,
     Sexo CHAR(1) NOT NULL,
-    Edad INT NOT NULL,
+    Fecha_Nacimiento DATETIME2 NOT NULL,
     Email VARCHAR(40) NOT NULL,
-    Contraseña VARCHAR(20) NOT NULL,
+    Contrasena VARCHAR(20) NOT NULL,
     ID_Ciudad INT NOT NULL
 )
 GO
@@ -65,7 +65,10 @@ GO
 CREATE TABLE LOGRO(
     ID_Logro INT NOT NULL IDENTITY,
     Nombre VARCHAR(20) NOT NULL,
-    Descripcion VARCHAR(80) NOT NULL
+    Descripcion VARCHAR(80) NOT NULL,
+    Cantidad_Visitas INT NOT NULL,
+    Tipo_Categoria VARCHAR(30),
+    Tipo_Etiqueta VARCHAR(30)
 )
 GO
 

@@ -1,7 +1,6 @@
 USE CuatroCuadras
 
 GO
-
    INSERT INTO ETIQUETA VALUES 
         ('Canoa'),
         ('Photoboot'),
@@ -32,6 +31,7 @@ GO
         ('Plantas'),
         ('Jardin Botanico');
 
+GO
     INSERT INTO Ciudad VALUES 
     ('Culiacán'),
     ('Navolato'),
@@ -41,35 +41,36 @@ GO
     ('Guadalajara'),
     ('Tijuana');
 
-INSERT INTO USUARIO VALUES
-    ('XxXGokuXxX','Juan','Perez Perez','M',14,'XxXGokuSSJXxX@hotmail.com','ContraseñaDeLaCIA',4),
-    ('Diana129','Diana','Aispuro Angulo','F',24,'DianaAisAng@hotmail.com','DianAisPAnG',2),
-    ('CuentaFeik','Jose Luis','Sanchez Rodriguez','M',21,'CuentaFakeParaApps@outlook.com','NoSoyFeik123',3),
-    ('Luiz','Luis','Lopez Lopez','M',30,'LuisLopezAlCuadrado@hotmail.com','LopezAlCuadrado',1),
-    ('Emilian99','Emiliano','Paez Lopez','M',50,'PaezLopEmiliano@outlook.com','LopezPaezEmil9912',2),
-    ('JoseCarl','Jose Carlos','Ventura Gararte','M',54,'JoseCarlos123@hotmail.com','JoseCarlGararVen',1),
-    ('Mari','Maria Elena','Perez Sarrion','F',38,'MariElen@hotmail.com','12Mari34Elen56aa78',7),
-    ('AnaALV','Ana Maria','Alvarez Castelo','F',26,'MarianaALV@hotmail.com','MariAnaLV1582',6),
-    ('SandCast','Sandra','Flores Castilla','F',16,'SandraCast@hotmail.com','Sandra1235',4),
-    ('Coronavirus','Angel','Gomez Bravo','M',19,'CoronaPandamiaVirus@hotmail.com','AntiVacunas2020',6),
-    ('Angel224','Angel','Torres Gomez','M',46,'AngelTG24@gmail.com','OsiContraseña',5),
-    ('MenitaXD98','Ximena','Castro Yepez','F',31,'menaCY@hotmail.com','menittha98',5),
-    ('Panchogo94','Francisco','Moreno Lopez','M',20,'PanchoGpi45@live.com.mx','panchito99',1),
-	('MigueMF', 'Miguel', 'Mendoza Fernandez', 'M', 23, 'miguemf@gmail.com', 'migmenfer97', 3),
-	('RamLop99', 'Ramon', 'Lopez Perez', 'M', 21, 'ramonlopez99@yahoo.com.mx', 'rammaster99', 7),
-	('GabiLuna', 'Gabriela', 'Luna Sanchez', 'F', 17, 'gabilusanxyz15@outlook.com', 'gabimoon15', 1),
-	('AlizV5', 'Alicia', 'Valenzuela Navarro', 'F', 29, 'alizzv12@outlook.com','navaliz91', 6);
-
-INSERT INTO LOGRO VALUES   
-    ('Fotogenico','Check-In en 3 lugares distintos con fotocabina (photoboot)'),
-    ('Navegante','Check-In en 3 lugares distinton con etiqueta "canoa"'),
-    ('La Voz','3 Check-In en un mes desde lugares con la categoria "Karaoke Bar"'),
-    ('Melómano','Hacer Check-In en 5 lugares de la categoría "Tienda de Musica'),
-    ('Cinéfilo','Hacer 15 Check-In en cines'),
-    ('Catador de Comida','Hacer Check-In en 10 diferentes restaurantes'),
-    ('Trabajador','Hacer 200 Check-In en lugares de la categoría "Oficinas');
-
-INSERT INTO AMIGO VALUES
+GO
+    INSERT INTO USUARIO VALUES
+    ('XxXGokuXxX','Juan','Perez Perez','M','1996-03-05','XxXGokuSSJXxX@hotmail.com','ContraseñaDeLaCIA',4),
+    ('Diana129','Diana','Aispuro Angulo','F','1992-12-09','DianaAisAng@hotmail.com','DianAisPAnG',2),
+    ('CuentaFeik','Jose Luis','Sanchez Rodriguez','M','1988-01-03 ','CuentaFakeParaApps@outlook.com','NoSoyFeik123',3),
+    ('Luiz','Luis','Lopez Lopez','M','1998-09-12','LuisLopezAlCuadrado@hotmail.com','LopezAlCuadrado',1),
+    ('Emilian99','Emiliano','Paez Lopez','M','1997-01-08','PaezLopEmiliano@outlook.com','LopezPaezEmil9912',2),
+    ('JoseCarl','Jose Carlos','Ventura Gararte','M','1965-12-24','JoseCarlos123@hotmail.com','JoseCarlGararVen',1),
+    ('Mari','Maria Elena','Perez Sarrion','F','1982-12-14','MariElen@hotmail.com','12Mari34Elen56aa78',7),
+    ('AnaALV','Ana Maria','Alvarez Castelo','F','1992-05-23','MarianaALV@hotmail.com','MariAnaLV1582',6),
+    ('SandCast','Sandra','Flores Castilla','F','1974-10-25','SandraCast@hotmail.com','Sandra1235',4),
+    ('Coronavirus','Angel','Gomez Bravo','M','1978-07-05','CoronaPandamiaVirus@hotmail.com','AntiVacunas2020',6),
+    ('Angel224','Angel','Torres Gomez','M','1994-09-23','AngelTG24@gmail.com','OsiContraseña',5),
+    ('MenitaXD98','Ximena','Castro Yepez','F','1999-12-22','menaCY@hotmail.com','menittha98',5),
+    ('Panchogo94','Francisco','Moreno Lopez','M','1997-05-05','PanchoGpi45@live.com.mx','panchito99',1),
+	('MigueMF', 'Miguel', 'Mendoza Fernandez', 'M', '1996-11-07', 'miguemf@gmail.com', 'migmenfer97', 3),
+	('RamLop99', 'Ramon', 'Lopez Perez', 'M', '1971-08-09', 'ramonlopez99@yahoo.com.mx', 'rammaster99', 7),
+	('GabiLuna', 'Gabriela', 'Luna Sanchez', 'F', '1998-02-21', 'gabilusanxyz15@outlook.com', 'gabimoon15', 1),
+	('AlizV5', 'Alicia', 'Valenzuela Navarro', 'F', '1977-12-16', 'alizzv12@outlook.com','navaliz91', 6);
+GO
+    INSERT INTO LOGRO(Nombre,Descripcion,Cantidad_Visitas) VALUES   
+    ('Fotogenico','Check-In en 3 lugares distintos con fotocabina (photoboot)',0),
+    ('Navegante','Check-In en 3 lugares distinton con etiqueta "canoa"',0),
+    ('La Voz','3 Check-In en un mes desde lugares con la categoria "Karaoke Bar"',0),
+    ('Melómano','Hacer Check-In en 5 lugares de la categoría "Tienda de Musica',0),
+    ('Cinéfilo','Hacer 15 Check-In en cines',0),
+    ('Catador de Comida','Hacer Check-In en 10 diferentes restaurantes',0),
+    ('Trabajador','Hacer 200 Check-In en lugares de la categoría "Oficinas',0);
+GO
+    INSERT INTO AMIGO VALUES
     ('Diana129','Mari'),
     ('Coronavirus','Angel224'),
     ('AnaALV','Mari'),
@@ -86,7 +87,7 @@ INSERT INTO AMIGO VALUES
 	('MigueMF', 'AlizV5'),
 	('GabiLuna', 'RamLop99'),
 	('RamLop99', 'AnaALV');
-
+GO
      INSERT INTO CATEGORIA VALUES    
         ('Karaoke Bar'),
         ('Tienda de Musica'),
@@ -104,8 +105,8 @@ INSERT INTO AMIGO VALUES
         ('Peluquerias'),
         ('Gasolinerias'),
         ('Estadios');
-
-INSERT INTO LUGAR VALUES
+GO
+    INSERT INTO LUGAR VALUES
     ('Estadio Tomateros','24.7777','-107.389457','Estadio de Beisbol',1,16,15),
     ('Sams Club 3 Rios','24.1373','-107.412717','Tienda de Mayoreo',1,7,4),
     ('Fühler','24.802018','-107.397176','Centro de Ocio',1,1,6),
@@ -128,7 +129,7 @@ INSERT INTO LUGAR VALUES
     ('Sears Plaza Rio','32.527653','-117.021206','Tienda Departamental',7,13,18),
     ('The Barber Shop','32.521646','-117.026613','Barberia Profesional',7,14,22);
 
-
+GO
     INSERT INTO VISITA (ID_Lugar, Nickname, Comentario, Valoracion, Fecha) VALUES  
     (9,'JoseCarl','Excelente',10,'Mar 20 2018 3:12 AM'),
     (2,'XxXGokuXxX','Bueno',6,'Dec 28 2019 4:28 PM'),
@@ -201,6 +202,7 @@ INSERT INTO LUGAR VALUES
 	(6, 'GabiLuna', 'Bueno', 7, 'May 23 2019 05:44 PM'),
 	(16, 'XxXGokuXxX', NULL, 10, 'Nov 14 2019 06:04 PM');
 
+GO
     INSERT INTO LOGRO_USUARIO VALUES
     ('Coronavirus',5,'Jan 31 2020 08:15 PM'),
     ('Luiz',4,'Dec 28 2019 01:19 PM'),
@@ -208,8 +210,8 @@ INSERT INTO LUGAR VALUES
     ('AnaALV',1,'Mar 10 2020 08:19 AM'),
     ('Luiz',5,'Nov 05 2019 11:52 AM'),
     ('XxXGokuXxX',2,'Sep 15 2019 08:15 PM');
-
-INSERT INTO INTERES VALUES 
+GO
+    INSERT INTO INTERES VALUES 
     ('Lectura'),
     ('Viajar'),
     ('Escritura'),
@@ -225,8 +227,8 @@ INSERT INTO INTERES VALUES
     ('Educación'),
     ('Familia'),
     ('Sociedad');
-
-INSERT INTO INTERES_USUARIO VALUES
+GO
+    INSERT INTO INTERES_USUARIO VALUES
     ('AnaALV',1),
     ('AnaALV',3),
     ('AnaALV',5),

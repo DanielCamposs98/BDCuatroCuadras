@@ -40,7 +40,7 @@ CREATE TABLE USUARIO(
     Nombre VARCHAR(40) NOT NULL,
     Apellidos VARCHAR(50) NOT NULL,
     Sexo CHAR(1) NOT NULL,
-    Fecha_Nacimiento DATETIME2 NOT NULL,
+    Fecha_Nacimiento DATE NOT NULL,
     Email VARCHAR(40) NOT NULL,
     Contrasena VARCHAR(20) NOT NULL,
     ID_Ciudad INT NOT NULL

@@ -69,3 +69,5 @@ GO
 
 ALTER TABLE USUARIO ADD CONSTRAINT Check_Sexo CHECK (Sexo IN ('M', 'F'))
 GO
+
+ALTER TABLE USUARIO ADD CONSTRAINT Check_Nacimiento Check (Fecha_Nacimiento<=GETDATE())

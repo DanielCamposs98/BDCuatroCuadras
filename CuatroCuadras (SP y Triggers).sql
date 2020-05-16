@@ -45,110 +45,59 @@ CREATE TRIGGER triLogroGanado ON Visita FOR INSERT
 AS  
     DECLARE @ID_Lugar INT
     DECLARE @Nickname NVARCHAR(35)
-    DECLARE @Comentario VARCHAR(50)
-    DECLARE @Valoracion TINYINT
-    DECLARE @Fecha DATETIME2
-    DECLARE @ID_Logro int
-    SELECT @ID_Lugar=ID_Lugar, @Nickname=Nickname, @Comentario=Comentario, @Valoracion=Valoracion, @Fecha=Fecha FROM inserted
+    DECLARE @ID_Etiqueta INT
+    DECLARE @ID_Categoria int
+    DECLARE @ID_Logro INT
+    SELECT @ID_Lugar=L.ID_Lugar, @Nickname=Nickname, @ID_Etiqueta=L.ID_Etiqueta, @ID_Categoria=L.ID_Categoria FROM inserted i
+    INNER JOIN Lugar L ON i.ID_Lugar=L.ID_Lugar
+
     --Ganarse logro Fotogenico; Check-In en 3 lugares distintos con fotocabina (photoboot)
-    IF(SELECT COUNT(V.ID_Lugar) FROM VISITA V
-        INNER JOIN LUGAR L on V.ID_Lugar=L.ID_Lugar
-        INNER JOIN ETIQUETA E on E.ID_Etiqueta=L.ID_Etiqueta
-        WHERE E.ID_Etiqueta=2 and v.Nickname=@Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Fotogenico')
-        SET @ID_Logro=1
-        IF EXISTS(SELECT Nickname, ID_Logro FROM LOGRO_USUARIO WHERE Nickname=@Nickname and ID_Logro=@ID_Logro)
-        BEGIN 
-            PRINT 'Ese logro ha sido ganado'
-        END
-        ELSE
-            INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, @ID_Logro, GETDATE())
-            PRINT 'Nuevo logro adquirido'
-            
-            
+    IF NOT EXISTS (SELECT 1 FROM LOGRO_USUARIO WHERE ((Nickname=@Nickname and ID_Logro=1) and @ID_Etiqueta=2))
+    IF(SELECT COUNT(*) FROM VISITA V 
+       INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
+       WHERE L.ID_Etiqueta = @ID_Etiqueta AND NICKNAME = @NickNAme)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Fotogenico')
+       INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 1, GETDATE())  
+
     --Ganarse logro Navegante; Check-In en 3 lugares distintos con etiqueta "canoa"
-    IF(SELECT COUNT(V.ID_Lugar) FROM VISITA V
-        INNER JOIN LUGAR L on V.ID_Lugar=L.ID_Lugar
-        INNER JOIN ETIQUETA E on E.ID_Etiqueta=L.ID_Etiqueta
-        WHERE E.ID_Etiqueta=1030 and v.Nickname=@Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Navegante')
-        SET @ID_Logro=3
-        IF EXISTS(SELECT Nickname, ID_Logro FROM LOGRO_USUARIO WHERE Nickname=@Nickname and ID_Logro=@ID_Logro)
-        BEGIN
-            PRINT 'Ese logro ha sido ganado'
-        END
-        ELSE
-            INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, @ID_Logro, GETDATE())
-            PRINT 'Nuevo logro adquirido'
-            COMMIT
+    ELSE IF NOT EXISTS(SELECT 1 FROM LOGRO_USUARIO, WHERE ((Nickname=@Nickname and ID_Logro=8) and @ID_Etiqueta=1030))
+    IF(SELECT COUNT(*) FROM VISITA V 
+       INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
+       WHERE L.ID_Etiqueta = @ID_Etiqueta AND NICKNAME = @Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Canoa')
+        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 8, GETDATE())
 
     --Ganarse logro La Voz; 3 Check-In en un mes desde lugares con la categoria "Karaoke Bar"
-    IF(SELECT COUNT(V.ID_Lugar) FROM VISITA V
-        INNER JOIN LUGAR L on V.ID_Lugar=L.ID_Lugar
-        INNER JOIN Categoria C on C.ID_Categoria=L.ID_Categoria
-        WHERE C.ID_Categoria=1 and v.Nickname=@Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='La Voz')
-         SET @ID_Logro=4
-        IF EXISTS(SELECT Nickname, ID_Logro FROM LOGRO_USUARIO WHERE Nickname=@Nickname and ID_Logro=@ID_Logro)
-        BEGIN
-            PRINT 'Ese logro ha sido ganado'
-        END
-        ELSE
-            INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, @ID_Logro, GETDATE())
-            PRINT 'Nuevo logro adquirido'
+    ELSE IF NOT EXISTS(SELECT 1 FROM LOGRO_USUARIO WHERE ((Nickname=@Nickname and ID_Logro=3) and @ID_Categoria=1))
+    IF(SELECT COUNT(*) FROM VISITA V 
+       INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
+       WHERE L.ID_Categoria = @ID_Categoria AND NICKNAME = @Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Karaoke Bar')
+        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 3, GETDATE())
 
     --Ganarse logro Melómano; Hacer Check-In en 5 lugares de la categoría "Tienda de Musica"
-    IF(SELECT COUNT(V.ID_Lugar) FROM VISITA V
-        INNER JOIN LUGAR L on V.ID_Lugar=L.ID_Lugar
-        INNER JOIN Categoria C on C.ID_Categoria=L.ID_Categoria
-        WHERE C.ID_Categoria= 2 and v.Nickname=@Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Melómano')
-        SET @ID_Logro=5
-        IF EXISTS(SELECT Nickname, ID_Logro FROM LOGRO_USUARIO WHERE Nickname=@Nickname and ID_Logro=@ID_Logro)
-        BEGIN
-            PRINT 'Ese logro ha sido ganado'
-        END
-        ELSE
-            INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, @ID_Logro, GETDATE())
-            PRINT 'Nuevo logro adquirido'
-            
+   ELSE IF NOT EXISTS(SELECT 1 FROM LOGRO_USUARIO WHERE ((Nickname=@Nickname and ID_Logro=4) and @ID_Categoria=2))
+    IF(SELECT COUNT(*) FROM VISITA V 
+       INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
+       WHERE L.ID_Categoria = @ID_Categoria AND NICKNAME = @Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Tienda de Musica')
+        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 4, GETDATE())
 
     --Ganarse logro Cinéfilo; Hacer 15 Check-In en cines
-    IF(SELECT COUNT(V.ID_Lugar) FROM VISITA V
-        INNER JOIN LUGAR L on V.ID_Lugar=L.ID_Lugar
-        INNER JOIN Categoria C on C.ID_Categoria=L.ID_Categoria
-        WHERE C.ID_Categoria=3 and v.Nickname=@Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Cinéfilo')
-        SET @ID_Logro=6
-        IF EXISTS(SELECT Nickname, ID_Logro FROM LOGRO_USUARIO WHERE Nickname=@Nickname and ID_Logro=@ID_Logro)
-        BEGIN
-            PRINT 'Ese logro ha sido ganado'
-        END
-        ELSE
-            INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, @ID_Logro, GETDATE())
-            PRINT 'Nuevo logro adquirido'
+    ELSE IF NOT EXISTS(SELECT 1 FROM LOGRO_USUARIO WHERE ((Nickname=@Nickname and ID_Logro=5) and @ID_Categoria=3))
+    IF(SELECT COUNT(*) FROM VISITA V 
+       INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
+       WHERE L.ID_Categoria = @ID_Categoria AND NICKNAME = @Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Cines')
+        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 5, GETDATE())
 
     --Ganarse logro Catador de Comida; Hacer Check-In en 10 diferentes restaurantes
-    IF(SELECT COUNT(V.ID_Lugar) FROM VISITA V
-        INNER JOIN LUGAR L on V.ID_Lugar=L.ID_Lugar
-        INNER JOIN Categoria C on C.ID_Categoria=L.ID_Categoria
-        WHERE C.ID_Categoria=4 and v.Nickname=@Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Catador de Comida')
-        SET @ID_Logro=7
-        IF EXISTS(SELECT Nickname, ID_Logro FROM LOGRO_USUARIO WHERE Nickname=@Nickname and ID_Logro=@ID_Logro)
-        BEGIN
-            PRINT 'Ese logro ha sido ganado'
-        END
-        ELSE
-            INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, @ID_Logro, GETDATE())
-            PRINT 'Nuevo logro adquirido'
+    ELSE IF NOT EXISTS(SELECT 1 FROM LOGRO_USUARIO WHERE ((Nickname=@Nickname and ID_Logro=6) and @ID_Categoria=4))
+    IF(SELECT COUNT(*) FROM VISITA V 
+       INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
+       WHERE L.ID_Categoria = @ID_Categoria AND NICKNAME = @Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Restaurantes')
+        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 6, GETDATE())
             
     --Ganarse logro Trabajador; Hacer 200 Check-In en lugares de la categoría "Oficinas
-    IF(SELECT COUNT(V.ID_Lugar) FROM VISITA V
-        INNER JOIN LUGAR L on V.ID_Lugar=L.ID_Lugar
-        INNER JOIN Categoria C on C.ID_Categoria=L.ID_Categoria
-        WHERE C.ID_Categoria=5 and v.Nickname=@Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Trabajador')
-        SET @ID_Logro=8
-        IF EXISTS(SELECT Nickname, ID_Logro FROM LOGRO_USUARIO WHERE Nickname=@Nickname and ID_Logro=@ID_Logro)
-        BEGIN
-            PRINT 'Ese logro ha sido ganado'
-        END
-        ELSE
-            INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, @ID_Logro, GETDATE())
-            PRINT 'Nuevo logro adquirido'
+    ELSE IF NOT EXISTS(SELECT 1 FROM LOGRO_USUARIO WHERE((Nickname=@Nickname and ID_Logro=7) and @ID_Categoria=5))
+    IF(SELECT COUNT(*) FROM VISITA V 
+       INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
+       WHERE L.ID_Categoria = @ID_Categoria AND NICKNAME = @Nickname)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Oficinas')
+        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 7, GETDATE())
                 
         drop TRIGGER triLogroGanado

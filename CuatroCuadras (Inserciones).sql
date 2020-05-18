@@ -1,5 +1,5 @@
 USE CuatroCuadras
-
+SELECT * FROM CIUDAD
 GO
    INSERT INTO ETIQUETA VALUES 
         ('Canoa'),
@@ -68,7 +68,9 @@ GO
     ('Melómano','Hacer Check-In en 5 lugares de la categoría "Tienda de Musica',0),
     ('Cinéfilo','Hacer 15 Check-In en cines',0),
     ('Catador de Comida','Hacer Check-In en 10 diferentes restaurantes',0),
-    ('Trabajador','Hacer 200 Check-In en lugares de la categoría "Oficinas',0);
+    ('Trabajador','Hacer 200 Check-In en lugares de la categoría "Oficinas',0),
+    ('Primeros Pasos','Te has registrado en Cuatro Cuadras. ¡Comienza a explorar con nosotros!',0);
+
 GO
     INSERT INTO AMIGO VALUES
     ('Diana129','Mari'),

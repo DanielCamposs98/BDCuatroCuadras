@@ -1,57 +1,9 @@
 USE CuatroCuadras
+
+-- ===========================================================================================
+--  Descripción: Validar categorías como se hace con ciudades; que no contengan números.
+-- ===========================================================================================
 GO
-
-<<<<<<< HEAD
-=======
---Stored Procedures
--- 1. Insertar ciudades si no existe alguna
-CREATE PROCEDURE SP_InsertCiudadUsuario
-    @Nickname NVARCHAR(35),
-    @Nombre VARCHAR(40),
-    @Apellidos VARCHAR(50),
-    @Sexo CHAR(1),
-    @Fecha_Nacimiento DATE,
-    @Email VARCHAR(40),
-    @Contrasena VARCHAR(20),
-    @ID_Ciudad INT,
-    @Ciudad VARCHAR(30)
-
-AS
-        SELECT @ID_Ciudad=ID_Ciudad from CIUDAD WHERE Ciudad=@Ciudad
-BEGIN
-if @ID_Ciudad in (Select ID_Ciudad from Ciudad where ID_Ciudad=@ID_Ciudad)
-    BEGIN
-    INSERT INTO USUARIO ( Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email, Contrasena, ID_Ciudad ) VALUES ( @Nickname, @Nombre, @Apellidos, @Sexo, @Fecha_Nacimiento, @Email, @Contrasena, @ID_Ciudad )
-    END
-ELSE
-    BEGIN
-    begin tran
-    --IF NOT EXISTS(Select 1 FROM CIUDAD where CIUDAD=@Ciudad)
-        INSERT INTO CIUDAD ( Ciudad ) VALUES (@Ciudad)
-    commit tran
-    INSERT INTO USUARIO ( Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email, Contrasena, ID_Ciudad ) VALUES ( @Nickname, @Nombre, @Apellidos, @Sexo, @Fecha_Nacimiento, @Email, @Contrasena, (Select MAX(ID_Ciudad) FROM CIUDAD) )
-    END
-END
-
-GO
-
---2. Borrar de la tabla de amigos
-CREATE PROCEDURE SP_BorrarAmigos
-    @Nickname1 NVARCHAR(35),
-    @Nickname2 NVARCHAR(35)
-AS
-BEGIN
-begin TRAN
-    DELETE FROM AMIGO Where AMIGO.Nickname1=@Nickname1 and AMIGO.Nickname2=@Nickname2
-    DELETE FROM AMIGO Where AMIGO.Nickname1=@Nickname2 and AMIGO.Nickname2=@Nickname1
-commit TRAN
-END
-
-GO
-
->>>>>>> 2cf44e435a845d51c01c1161a2b1c6432b6bc930
--- TRIGGERS
--- 1. Validar categorías como se hace con ciudades; que no contengan números.
 CREATE TRIGGER triValidarEtiqueta ON ETIQUETA 
 FOR INSERT AS DECLARE @nombreEtiqueta VARCHAR(30) 
 SELECT @nombreEtiqueta = Nombre_eti FROM inserted 
@@ -60,9 +12,17 @@ IF(@nombreEtiqueta LIKE '[1234567890]%' OR @nombreEtiqueta LIKE '%[1234567890]%'
         PRINT 'El nombre de la ciudad no debe contener números.'
         ROLLBACK TRAN
     END
+    
+-- ===========================================================================================
+--  Descripción: Aceptar solicitud.
+-- ===========================================================================================
 GO
--- 2. Aceptar solicitud.
--- 3. Borrar logro al borrar etiqueta.
+
+
+-- ===========================================================================================
+--  Descripción: Borrar logro al borrar etiqueta.
+-- ===========================================================================================
+GO
 CREATE TRIGGER triBorrarLogro ON ETIQUETA
 FOR DELETE AS 
 DECLARE @nombreEtiqueta VARCHAR(20)
@@ -77,9 +37,12 @@ BEGIN
         SELECT ERROR_MESSAGE() as ErrorMesage
     END CATCH
 END
-GO
 
--- 4. Validar ciudades para que no contengan números.
+
+-- ===========================================================================================
+--  Descripción: Validar ciudades para que no contengan números.
+-- ===========================================================================================
+GO
 CREATE TRIGGER triValidarCiudad ON Ciudad 
 FOR INSERT AS DECLARE @nombreCiudad VARCHAR(30) 
 SELECT @nombreCiudad = Ciudad FROM inserted 
@@ -88,8 +51,13 @@ IF(@nombreCiudad LIKE '[1234567890]%' OR @nombreCiudad LIKE '%[1234567890]%' OR 
         PRINT 'El nombre de la ciudad no debe contener números.'
         ROLLBACK TRAN
     END
+
+
+
+-- ===========================================================================================
+--  Descripción: Ganarse logros.
+-- ===========================================================================================
 GO
--- 5. Ganarse logros.
     --5.1 Logro de Fotogenico
 CREATE TRIGGER triLogroFotogenico ON VISITA FOR INSERT
 AS
@@ -107,6 +75,8 @@ AS
        INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
        WHERE L.ID_Etiqueta = @ID_Etiqueta AND NICKNAME = @NickNAme)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Fotogenico')
        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 1, GETDATE())
+
+
 GO
     --5.2 Logro de Navegante
 CREATE TRIGGER triLogroNavegante ON VISITA FOR INSERT
@@ -126,6 +96,8 @@ AS
        INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
        WHERE L.ID_Etiqueta = @ID_Etiqueta AND NICKNAME = @NickNAme)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Navegante')
        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 8, GETDATE())
+
+
 GO
     --5.3 Logro de La Voz
 CREATE TRIGGER triLogroLaVoz ON VISITA FOR INSERT
@@ -145,6 +117,8 @@ AS
        INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
        WHERE L.ID_Categoria = @ID_Categoria AND NICKNAME = @NickNAme)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='La Voz')
        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 3, GETDATE())
+
+
 GO
     --5.4 Logro de Melómano
 CREATE TRIGGER triLogroMelomano ON VISITA FOR INSERT
@@ -164,8 +138,9 @@ AS
        INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
        WHERE L.ID_Categoria = @ID_Categoria AND NICKNAME = @NickNAme)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Melómano')
        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 4, GETDATE())
-GO
 
+
+GO
     --5.5 Logro de Cinéfilo
 CREATE TRIGGER triLogroCinefilo ON VISITA FOR INSERT
 AS
@@ -184,6 +159,8 @@ AS
        INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
        WHERE L.ID_Categoria = @ID_Categoria AND NICKNAME = @NickNAme)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Cinéfilo')
        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 5, GETDATE())
+
+
 GO
   --5.6 Logro de Catador de Comida
 CREATE TRIGGER triLogroCatadorDeComida ON VISITA FOR INSERT
@@ -203,6 +180,8 @@ AS
        INNER JOIN Lugar L ON (L.Id_Lugar = V.Id_Lugar) 
        WHERE L.ID_Categoria = @ID_Categoria AND NICKNAME = @NickNAme)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Catador de Comida')
        INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 6, GETDATE())
+
+
 GO
 --5.7 Logro de Trabajador
 CREATE TRIGGER triLogroTrabajador ON VISITA FOR INSERT

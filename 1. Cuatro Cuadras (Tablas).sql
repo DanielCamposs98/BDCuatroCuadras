@@ -1,0 +1,91 @@
+CREATE DATABASE CuatroCuadras
+GO
+
+USE CuatroCuadras
+GO
+
+
+CREATE TABLE ETIQUETA(
+    ID_Etiqueta INT NOT NULL IDENTITY,
+    Nombre_eti VARCHAR(20) NOT NULL,
+)
+GO
+
+CREATE TABLE CATEGORIA(
+    ID_Categoria INT NOT NULL IDENTITY,
+    Descripcion VARCHAR(30) NOT NULL
+)
+GO
+
+CREATE TABLE CIUDAD(
+    ID_Ciudad INT NOT NULL IDENTITY,
+    Ciudad VARCHAR(30) NOT NULL
+)
+GO
+
+CREATE TABLE LUGAR(
+    ID_Lugar INT NOT NULL IDENTITY,
+    Nombre VARCHAR(45) NOT NULL,
+    Latitud VARCHAR(20) NOT NULL,
+    Longitud VARCHAR(20) NOT NULL,
+    Descripcion VARCHAR(100) NOT NULL,
+    ID_Ciudad INT NOT NULL,
+    ID_Categoria INT NOT NULL,
+    ID_Etiqueta INT NOT NULL
+)
+GO
+
+CREATE TABLE USUARIO(
+    Nickname NVARCHAR(35) NOT NULL,
+    Nombre VARCHAR(40) NOT NULL,
+    Apellidos VARCHAR(50) NOT NULL,
+    Sexo CHAR(1) NOT NULL,
+    Fecha_Nacimiento DATE NOT NULL,
+    Email VARCHAR(40) NOT NULL,
+    Contrasena VARCHAR(20) NOT NULL,
+    ID_Ciudad INT NOT NULL
+)
+GO
+
+CREATE TABLE VISITA(
+    ID_Lugar INT NOT NULL,
+    Nickname NVARCHAR(35) NOT NULL,
+    Comentario VARCHAR(50),
+    Valoracion TINYINT NOT NULL,
+    Fecha DATETIME2 NOT NULL
+)
+GO
+
+CREATE TABLE INTERES(
+    ID_Interes INT NOT NULL IDENTITY,
+    Interes VARCHAR(30) NOT NULL
+)
+GO
+
+CREATE TABLE LOGRO(
+    ID_Logro INT NOT NULL IDENTITY,
+    Nombre VARCHAR(20) NOT NULL,
+    Descripcion VARCHAR(80) NOT NULL,
+    Cantidad_Visitas INT NOT NULL,
+    Tipo_Categoria VARCHAR(30),
+    Tipo_Etiqueta VARCHAR(30)
+)
+GO
+
+CREATE TABLE AMIGO(
+    Nickname1 NVARCHAR(35) NOT NULL,
+    Nickname2 NVARCHAR(35) NOT NULL
+)
+GO
+
+CREATE TABLE LOGRO_USUARIO(
+    Nickname NVARCHAR(35) NOT NULL,
+    ID_Logro INT NOT NULL,
+    Fecha DATETIME2 NOT NULL
+)
+GO
+
+CREATE TABLE INTERES_USUARIO(
+    Nickname NVARCHAR(35) NOT NULL,
+    ID_Interes INT NOT NULL
+)

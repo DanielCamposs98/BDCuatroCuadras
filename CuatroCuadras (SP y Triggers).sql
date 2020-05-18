@@ -3,10 +3,6 @@ GO
 
 --Stored Procedures
 -- 1. Insertar ciudades si no existe alguna
-if object_id('SP_InsertCiudadUsuario') is not null
-  drop procedure SP_InsertCiudadUsuario
-
-GO
 CREATE PROCEDURE SP_InsertCiudadUsuario
     @Nickname NVARCHAR(35),
     @Nombre VARCHAR(40),
@@ -33,6 +29,20 @@ ELSE
     commit tran
     INSERT INTO USUARIO ( Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email, Contrasena, ID_Ciudad ) VALUES ( @Nickname, @Nombre, @Apellidos, @Sexo, @Fecha_Nacimiento, @Email, @Contrasena, (Select MAX(ID_Ciudad) FROM CIUDAD) )
     END
+END
+
+GO
+
+--2. Borrar de la tabla de amigos
+CREATE PROCEDURE SP_BorrarAmigos
+    @Nickname1 NVARCHAR(35),
+    @Nickname2 NVARCHAR(35)
+AS
+BEGIN
+begin TRAN
+    DELETE FROM AMIGO Where AMIGO.Nickname1=@Nickname1 and AMIGO.Nickname2=@Nickname2
+    DELETE FROM AMIGO Where AMIGO.Nickname1=@Nickname2 and AMIGO.Nickname2=@Nickname1
+commit TRAN
 END
 
 GO

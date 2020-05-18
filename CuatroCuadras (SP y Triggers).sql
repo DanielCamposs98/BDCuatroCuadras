@@ -1,5 +1,6 @@
 USE CuatroCuadras
 GO
+
 -- TRIGGERS
 -- 1. Validar categorías como se hace con ciudades; que no contengan números.
 CREATE TRIGGER triValidarEtiqueta ON ETIQUETA 

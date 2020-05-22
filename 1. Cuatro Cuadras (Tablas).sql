@@ -67,14 +67,16 @@ CREATE TABLE LOGRO(
     Nombre VARCHAR(20) NOT NULL,
     Descripcion VARCHAR(80) NOT NULL,
     Cantidad_Visitas INT NOT NULL,
-    Tipo_Categoria VARCHAR(30),
-    Tipo_Etiqueta VARCHAR(30)
+    Tipo_Categoria int,
+    Tipo_Etiqueta int,
+    Disponibilidad bit NOT NULL
 )
 GO
 
 CREATE TABLE AMIGO(
     Nickname1 NVARCHAR(35) NOT NULL,
-    Nickname2 NVARCHAR(35) NOT NULL
+    Nickname2 NVARCHAR(35) NOT NULL,
+    Estado CHAR(1) NOT NULL
 )
 GO
 

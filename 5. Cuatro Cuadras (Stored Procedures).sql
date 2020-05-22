@@ -80,9 +80,32 @@ begin TRAN
 commit TRAN
 END
 
+-- ===========================================================================================
+-- Descripción: Mostrar el porcentaje que lleva realizado un usuario en cada logro
+-- ===========================================================================================
 GO
-
--- ===========================================================================================
--- Descripción: Borrar de la tabla de amigos
--- ===========================================================================================
-
+CREATE PROCEDURE SP_AvanceLogros
+    @Nickname varchar(30)
+AS
+BEGIN
+    Select U.Nickname, L1.Nombre,L1.Cantidad_Visitas,COUNT(*) as [Visitas Realizadas], ((100/L1.Cantidad_Visitas)*COUNT(*)) as Porcentaje from VISITA V 
+	INNER JOIN USUARIO U 
+	ON V.Nickname=U.Nickname 
+	INNER JOIN LUGAR L 
+	ON V.ID_Lugar=L.ID_Lugar
+	INNER JOIN LOGRO L1
+	ON L.ID_Categoria=L1.Tipo_Categoria
+	WHERE U.Nickname=@Nickname
+	GROUP BY U.Nickname,L1.Nombre,L1.Cantidad_Visitas
+	UNION
+	Select U.Nickname, L1.Nombre,L1.Cantidad_Visitas,COUNT(*) as [Visitas Realizadas], ((100/L1.Cantidad_Visitas)*COUNT(*)) as Porcentaje from VISITA V 
+	INNER JOIN USUARIO U 
+	ON V.Nickname=U.Nickname 
+	INNER JOIN LUGAR L 
+	ON V.ID_Lugar=L.ID_Lugar
+	INNER JOIN LOGRO L1
+	ON L.ID_Etiqueta=L1.Tipo_Etiqueta
+	WHERE U.Nickname=@Nickname
+	GROUP BY U.Nickname,L1.Nombre,L1.Cantidad_Visitas
+	ORDER BY Porcentaje DESC
+END

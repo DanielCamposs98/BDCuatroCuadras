@@ -1,5 +1,4 @@
 USE CuatroCuadras
-SELECT * FROM CIUDAD
 GO
    INSERT INTO ETIQUETA VALUES 
         ('Canoa'),
@@ -32,6 +31,27 @@ GO
         ('Jardin Botanico');
 
 GO
+
+     INSERT INTO CATEGORIA VALUES    
+        ('Karaoke Bar'),
+        ('Tienda de Musica'),
+        ('Cines'),
+        ('Restaurantes'),
+        ('Oficinas'),
+        ('Farmacias'),
+        ('Supermercados'),
+        ('Hospitales'),
+        ('Parques'),
+        ('Aeropuertos'),
+        ('Tienda de Ropa'),
+        ('Bancos'),
+        ('Tienda Departamental'),
+        ('Peluquerias'),
+        ('Gasolinerias'),
+        ('Estadios');
+
+GO
+
     INSERT INTO Ciudad VALUES 
     ('Culiacán'),
     ('Navolato'),
@@ -61,52 +81,35 @@ GO
 	('GabiLuna', 'Gabriela', 'Luna Sanchez', 'F', '1998-02-21', 'gabilusanxyz15@outlook.com', 'gabimoon15', 1),
 	('AlizV5', 'Alicia', 'Valenzuela Navarro', 'F', '1977-12-16', 'alizzv12@outlook.com','navaliz91', 6);
 GO
-    INSERT INTO LOGRO(Nombre,Descripcion,Cantidad_Visitas) VALUES   
-    ('Fotogenico','Check-In en 3 lugares distintos con fotocabina (photoboot)',0),
-    ('Navegante','Check-In en 3 lugares distinton con etiqueta "canoa"',0),
-    ('La Voz','3 Check-In en un mes desde lugares con la categoria "Karaoke Bar"',0),
-    ('Melómano','Hacer Check-In en 5 lugares de la categoría "Tienda de Musica',0),
-    ('Cinéfilo','Hacer 15 Check-In en cines',0),
-    ('Catador de Comida','Hacer Check-In en 10 diferentes restaurantes',0),
-    ('Trabajador','Hacer 200 Check-In en lugares de la categoría "Oficinas',0),
-    ('Primeros Pasos','Te has registrado en Cuatro Cuadras. ¡Comienza a explorar con nosotros!',0);
+    INSERT INTO LOGRO(Nombre,Descripcion,Cantidad_Visitas,Tipo_Categoria,Tipo_Etiqueta,Disponibilidad) VALUES   
+    ('Fotogenico','Check-In en 3 lugares distintos con fotocabina (photoboot)',3,NULL,2,1),
+    ('Navegante','Check-In en 3 lugares distinton con etiqueta "canoa"',3,NULL,1,1),
+    ('La Voz','3 Check-In en un mes desde lugares con la categoria "Karaoke Bar"',3,1,NULL,1),
+    ('Melómano','Hacer Check-In en 5 lugares de la categoría "Tienda de Musica',5,2,NULL,1),
+    ('Cinéfilo','Hacer 15 Check-In en cines',3,NULL,15,1),
+    ('Catador de Comida','Hacer Check-In en 10 diferentes restaurantes',15,4,NULL,1),
+    ('Trabajador','Hacer 200 Check-In en lugares de la categoría "Oficinas',200,5,NULL,1),
+    ('Primeros Pasos','Te has registrado en Cuatro Cuadras. ¡Comienza a explorar con nosotros!',0,NULL,NULL,1);
 
 GO
     INSERT INTO AMIGO VALUES
-    ('Diana129','Mari'),
-    ('Coronavirus','Angel224'),
-    ('AnaALV','Mari'),
-    ('SandCast','CuentaFeik'),
-    ('JoseCarl','XxXGokuXxX'),
-    ('Luiz','Mari'),
-    ('Luiz','Coronavirus'),
-    ('Panchogo94','MenitaXD98'),
-    ('Emilian99','AnaALV'),
-    ('Angel224','Diana129'),
-    ('JoseCarl','MenitaXD98'),
-    ('SandCast','Panchogo94'),
-    ('Panchogo94','CuentaFeik'),
-	('MigueMF', 'AlizV5'),
-	('GabiLuna', 'RamLop99'),
-	('RamLop99', 'AnaALV');
-GO
-     INSERT INTO CATEGORIA VALUES    
-        ('Karaoke Bar'),
-        ('Tienda de Musica'),
-        ('Cines'),
-        ('Restaurantes'),
-        ('Oficinas'),
-        ('Farmacias'),
-        ('Supermercados'),
-        ('Hospitales'),
-        ('Parques'),
-        ('Aeropuertos'),
-        ('Tienda de Ropa'),
-        ('Bancos'),
-        ('Tienda Departamental'),
-        ('Peluquerias'),
-        ('Gasolinerias'),
-        ('Estadios');
+    ('Diana129','Mari','A'),
+    ('Coronavirus','Angel224','A'),
+    ('AnaALV','Mari','A'),
+    ('SandCast','CuentaFeik','A'),
+    ('JoseCarl','XxXGokuXxX','A'),
+    ('Luiz','Mari','A'),
+    ('Luiz','Coronavirus','A'),
+    ('Panchogo94','MenitaXD98','A'),
+    ('Emilian99','AnaALV','A'),
+    ('Angel224','Diana129','A'),
+    ('JoseCarl','MenitaXD98','A'),
+    ('SandCast','Panchogo94','A'),
+    ('Panchogo94','CuentaFeik','A'),
+	('MigueMF', 'AlizV5','A'),
+	('GabiLuna', 'RamLop99','A'),
+	('RamLop99', 'AnaALV','A');
+
 GO
     INSERT INTO LUGAR VALUES
     ('Estadio Tomateros','24.7777','-107.389457','Estadio de Beisbol',1,16,15),

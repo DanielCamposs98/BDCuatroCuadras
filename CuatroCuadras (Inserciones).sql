@@ -132,8 +132,8 @@ GO
     ('Aeropuerto Internacional de Tijuana','32.541651','-116.974962','Aeropuerto Internacional',7,10,9),
     ('Hospital Ángeles','32.518155','-117.007258','Hospital Privado',7,8,5),
     ('Sears Plaza Rio','32.527653','-117.021206','Tienda Departamental',7,13,18),
-    ('The Barber Shop','32.521646','-117.026613','Barberia Profesional',7,14,22);
-
+    ('The Barber Shop','32.521646','-117.026613','Barberia Profesional',7,14,22),
+    ('Fotocabina', 24.214312, -107.234212, 'Tómate fotos', 2, 2, 1)
 GO
     INSERT INTO VISITA (ID_Lugar, Nickname, Comentario, Valoracion, Fecha) VALUES  
     (9,'JoseCarl','Excelente',10,'Mar 20 2018 3:12 AM'),

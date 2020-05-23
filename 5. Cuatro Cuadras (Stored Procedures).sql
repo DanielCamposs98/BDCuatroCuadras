@@ -1,41 +1,43 @@
 -- ===========================================================================================
--- Descripción: SP para actualizar los datos del Usuario a nivel global
+-- Descripción: Mostrar los amigos en comun
 -- ===========================================================================================
-
-
-GO
--- ===========================================================================================
--- Descripción:	Procedimiento almacenado que realiza diferentes backups de la base de datos.
--- ===========================================================================================
-CREATE PROCEDURE [dbo].[RESPALDO]
+CREATE PROCEDURE SP_AmigosEnComun
+    @Nickname1 NVARCHAR(35),
+	@Nickname2 NVARCHAR(35)
 AS
 BEGIN
-	DECLARE @NOMBRE VARCHAR(70);
-		
-	SET @NOMBRE = 'C:\Backup CuatroCuadras (' 
-				  + CAST((SELECT SYSDATETIME()) AS VARCHAR(10))
-				  + ') - ('
-				  + REPLACE(CAST(SUBSTRING(CONVERT( VARCHAR, (SELECT SYSDATETIME()), 100 ),13,19) AS VARCHAR), ':', ';')
-				  + ').BAK'
-	BACKUP DATABASE [CuatroCuadras]
-	TO DISK = @NOMBRE
-    WITH FORMAT;
+
+	DECLARE @AmigosEnComun Table(
+	Nickname1 NVARCHAR(35),
+	Nickname2 NVARCHAR(35)
+	)
+
+	INSERT INTO @AmigosEnComun 
+
+	Select * from
+		(Select Nickname1,Nickname2 FROM AMIGO 
+		WHERE Nickname1=@Nickname1
+		UNION
+		Select Nickname2,Nickname1 FROM AMIGO
+		WHERE Nickname2=@Nickname1 and estado='A') as T1
+	UNION
+	Select * from
+		(Select Nickname1,Nickname2 FROM AMIGO 
+		WHERE Nickname1=@Nickname2
+		UNION
+		Select Nickname2,Nickname1 FROM AMIGO
+		WHERE Nickname2=@Nickname2 and estado='A') as T2
+
+	Select Nickname2 as [Amigo en Comun] from @AmigosEnComun
+	GROUP BY Nickname2
+	Having count(*)>1
 END
 
--- CÓDIGO DE PRUEBA
-EXEC RESPALDO;
-
-RESTORE DATABASE [CuatroCuadras] FROM  DISK = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\Backup CuatroCuadras (2020-05-18) - ( 1;27AM).BAK' WITH  FILE = 1,  MOVE N'CuatroCuadras' TO N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\CuatroCuadras.mdf',  MOVE N'CuatroCuadras_log' TO N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\CuatroCuadras_log.ldf',  NOUNLOAD,  STATS = 5
-
-
-
-
--- ===========================================================================================
--- Descripción: Insertar ciudades si no existe alguna
--- ===========================================================================================
-
 GO
-CREATE PROCEDURE SP_InsertCiudadUsuario
+-- ===========================================================================================
+-- Descripción: Insertar Usuario y asignarle automaticamente el logro "Primeros Pasos"
+-- ===========================================================================================
+CREATE PROCEDURE SP_InsertUsuarioLogro
     @Nickname NVARCHAR(35),
     @Nombre VARCHAR(40),
     @Apellidos VARCHAR(50),
@@ -43,47 +45,46 @@ CREATE PROCEDURE SP_InsertCiudadUsuario
     @Fecha_Nacimiento DATE,
     @Email VARCHAR(40),
     @Contrasena VARCHAR(20),
-    @ID_Ciudad INT,
-    @Ciudad VARCHAR(30)
+    @ID_Ciudad INT
 
 AS
-        SELECT @ID_Ciudad=ID_Ciudad from CIUDAD WHERE Ciudad=@Ciudad
 BEGIN
-if @ID_Ciudad in (Select ID_Ciudad from Ciudad where ID_Ciudad=@ID_Ciudad)
-    BEGIN
+Begin try 
+Begin TRAN
     INSERT INTO USUARIO ( Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email, Contrasena, ID_Ciudad ) VALUES ( @Nickname, @Nombre, @Apellidos, @Sexo, @Fecha_Nacimiento, @Email, @Contrasena, @ID_Ciudad )
-    END
-ELSE
-    BEGIN
-    begin tran
-    --IF NOT EXISTS(Select 1 FROM CIUDAD where CIUDAD=@Ciudad)
-        INSERT INTO CIUDAD ( Ciudad ) VALUES (@Ciudad)
-    commit tran
-    INSERT INTO USUARIO ( Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email, Contrasena, ID_Ciudad ) VALUES ( @Nickname, @Nombre, @Apellidos, @Sexo, @Fecha_Nacimiento, @Email, @Contrasena, (Select MAX(ID_Ciudad) FROM CIUDAD) )
-    END
+    INSERT INTO LOGRO_USUARIO (Nickname,ID_Logro,Fecha) VALUES (@Nickname, 8, GETDATE())
+COMMIT TRAN 
+End try 
+    Begin CATCH
+        IF @@TRANCOUNT>0
+        ROLLBACK TRANSACTION
+    End CATCH
 END
 
-
-
--- ===========================================================================================
--- Descripción: Borrar de la tabla de amigos
--- ===========================================================================================
 GO
-CREATE PROCEDURE SP_BorrarAmigos
+-- ===========================================================================================
+-- Descripción: Mandar solicitud de amistad a un Usuario
+-- ===========================================================================================
+CREATE PROCEDURE SP_SolicitudAmistad
     @Nickname1 NVARCHAR(35),
-    @Nickname2 NVARCHAR(35)
+	@Nickname2 NVARCHAR(35)
 AS
 BEGIN
-begin TRAN
-    DELETE FROM AMIGO Where AMIGO.Nickname1=@Nickname1 and AMIGO.Nickname2=@Nickname2
-    DELETE FROM AMIGO Where AMIGO.Nickname1=@Nickname2 and AMIGO.Nickname2=@Nickname1
-commit TRAN
+Begin try 
+Begin TRAN
+    INSERT INTO AMIGO ( Nickname1, Nickname2, Estado ) VALUES ( @Nickname1, @Nickname2, 'P')
+COMMIT TRAN 
+End try 
+    Begin CATCH
+        IF @@TRANCOUNT>0
+        ROLLBACK TRANSACTION
+    End CATCH
 END
 
+GO
 -- ===========================================================================================
 -- Descripción: Mostrar el porcentaje que lleva realizado un usuario en cada logro
 -- ===========================================================================================
-GO
 CREATE PROCEDURE SP_AvanceLogros
     @Nickname varchar(30)
 AS
@@ -110,11 +111,10 @@ BEGIN
 	ORDER BY Porcentaje DESC
 END
 
+GO
 -- ===========================================================================================
 -- Descripción: Busca cualquier palabra ingresada por toda la base de datos
 -- ===========================================================================================
-GO
-
 CREATE PROC SP_BuscadorGenerico
     @StrValorBusqueda nvarchar(100)
 AS

@@ -42,7 +42,7 @@ CREATE TABLE USUARIO(
     Sexo CHAR(1) NOT NULL,
     Fecha_Nacimiento DATE NOT NULL,
     Email VARCHAR(40) NOT NULL,
-    Contrasena VARCHAR(20) NOT NULL,
+    Contrasena VARCHAR(MAX) NOT NULL,
     ID_Ciudad INT NOT NULL
 )
 GO

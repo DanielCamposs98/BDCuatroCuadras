@@ -173,15 +173,6 @@ GO
 -- ===========================================================================================
 create trigger triEncriptarContrasena ON Usuario INSTEAD OF INSERT
 AS
-    DECLARE @Nickname NVARCHAR(35)
-    DECLARE @Nombre VARCHAR(40)
-    DECLARE @Apellidos VARCHAR(50)
-    DECLARE @Sexo CHAR(1)
-    DECLARE @Fecha_Nacimiento DATE
-    DECLARE @Email VARCHAR(40)
-    DECLARE @Contrasena VARCHAR(MAX)
-    DECLARE @ID_Ciudad INT
-
     INSERT INTO USUARIO
     SELECT Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email,ENCRYPTBYPASSPHRASE('Contraseña',Contrasena), ID_Ciudad FROM inserted
 GO

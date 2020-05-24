@@ -1,9 +1,20 @@
 USE CuatroCuadras
 GO
 -- ===========================================================================================
---  TRIGGER PENDIENTE
+--  Descripción: Sugerir Amigos.
 -- ===========================================================================================
+CREATE TRIGGER TR_Amigos_SugerirAmigos ON Amigo
+AFTER INSERT
+ AS
+    DECLARE @AmigosSugeridos TABLE(
+        Nickname VARCHAR(max)
+    )
 
+    INSERT INTO @AmigosSugeridos EXEC usp_AmigosEnComun
+
+    SELECT TOP(3)* FROM @AmigosSugeridos
+
+GO
 -- ===========================================================================================
 --  Descripción: Aceptar solicitud.
 -- ===========================================================================================
@@ -63,6 +74,7 @@ AS
                     WHERE L.ID_Etiqueta = @ID_Etiqueta AND NICKNAME = @NickNAme)>=(SELECT Cantidad_Visitas FROM LOGRO WHERE Nombre='Fotogenico')
                         INSERT INTO LOGRO_USUARIO(Nickname, ID_Logro, Fecha) VALUES (@Nickname, 1, GETDATE())
 GO
+
     --5.2 Logro de Navegante
 CREATE TRIGGER triLogroNavegante ON VISITA FOR INSERT
 AS
@@ -178,10 +190,24 @@ AS
 GO
 
 -- ===========================================================================================
---  Descripción: Encriptar contraseña de usuarios
+--  Descripción: Verificar que la etiqueta o la categoria existan al insertar
 -- ===========================================================================================
-create trigger triEncriptarContrasena ON Usuario INSTEAD OF INSERT
+CREATE TRIGGER TR_LOGRO_VerificarEti_Cat ON LOGRO INSTEAD OF INSERT
 AS
-    INSERT INTO USUARIO
-    SELECT Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email,ENCRYPTBYPASSPHRASE('Contraseña',Contrasena), ID_Ciudad FROM inserted
+
+    DECLARE @ID_Etiqueta INT = (SELECT Tipo_Etiqueta FROM inserted)
+    DECLARE @ID_Categoria INT = (SELECT Tipo_Categoria FROM inserted)
+
+    IF @ID_Categoria IS NULL
+    BEGIN
+        IF(SELECT COUNT(*) FROM ETIQUETA WHERE ID_Etiqueta=@ID_Etiqueta)>0
+            INSERT INTO LOGRO  SELECT Nombre,Descripcion,Cantidad_Visitas,Tipo_Categoria,Tipo_Etiqueta,Disponibilidad FROM inserted
+    END
+    
+    IF @ID_Etiqueta IS NULL
+    BEGIN  
+         IF(SELECT COUNT(*) FROM CATEGORIA WHERE ID_Categoria=@ID_Categoria)>0
+            INSERT INTO LOGRO  SELECT Nombre,Descripcion,Cantidad_Visitas,Tipo_Categoria,Tipo_Etiqueta,Disponibilidad FROM inserted
+    END
 GO
+

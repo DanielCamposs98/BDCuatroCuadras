@@ -164,3 +164,13 @@ WHILE @NombreTabla IS NOT NULL
      END
      SELECT NombreColumna, ValorColumna FROM #Resultado
 END
+GO
+-- ===========================================================================================
+--  Descripción: Encriptar contraseña de usuarios
+-- ===========================================================================================
+create trigger triEncriptarContrasena ON Usuario INSTEAD OF INSERT
+AS
+    INSERT INTO USUARIO
+    SELECT Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email,ENCRYPTBYPASSPHRASE('Contraseña',Contrasena), ID_Ciudad FROM inserted
+
+GO

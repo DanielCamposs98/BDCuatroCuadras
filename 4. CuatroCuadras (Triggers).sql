@@ -7,8 +7,17 @@ GO
 -- ===========================================================================================
 --  Descripción: Aceptar solicitud.
 -- ===========================================================================================
+CREATE TRIGGER triSolicitudes ON AMIGO AFTER UPDATE
+AS
+    Declare @Estado CHAR(1)
+    DECLARE @N1 NVARCHAR(35)
+    DECLARE @N2 NVARCHAR(35)
 
+    SELECT @N1=Nickname1, @N2=Nickname2, @Estado=Estado from inserted
+    IF(@Estado)='R'
+        DELETE FROM AMIGO WHERE Nickname1=@N1 and Nickname2=@N2
 
+GO
 -- ===========================================================================================
 --  Descripción: Dar de baja logro al borrar etiqueta
 -- ===========================================================================================

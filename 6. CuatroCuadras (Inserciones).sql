@@ -197,7 +197,11 @@ GO
 	('GabiLuna', 'RamLop99','A')
     GO
     INSERT INTO AMIGO VALUES
-	('RamLop99', 'AnaALV','A');
+	('RamLop99', 'AnaALV','A')
+    
+    INSERT INTO AMIGO VALUES
+    ('AnaALV','GabiLuna','A');
+    
 GO
     INSERT INTO VISITA (ID_Lugar, Nickname, Comentario, Valoracion, Fecha) VALUES  
     (9,'JoseCarl','Excelente',10,'Mar 20 2018 3:12 AM')

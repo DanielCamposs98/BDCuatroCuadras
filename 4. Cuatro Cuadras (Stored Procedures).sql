@@ -3,7 +3,7 @@ GO
 -- ===========================================================================================
 -- Descripción: Mostrar los amigos en comun
 -- ===========================================================================================
-CREATE PROCEDURE SP_AmigosEnComun
+CREATE PROCEDURE USP_AmigosEnComun
     @Nickname1 NVARCHAR(35),
 	@Nickname2 NVARCHAR(35)
 AS
@@ -39,35 +39,37 @@ GO
 -- ===========================================================================================
 -- Descripción: Insertar Usuario y asignarle automaticamente el logro "Primeros Pasos"
 -- ===========================================================================================
-CREATE PROCEDURE SP_InsertUsuarioLogro
+CREATE PROCEDURE USP_InsertUsuarioLogro
     @Nickname NVARCHAR(35),
     @Nombre VARCHAR(40),
     @Apellidos VARCHAR(50),
     @Sexo CHAR(1),
     @Fecha_Nacimiento DATE,
     @Email VARCHAR(40),
-    @Contrasena VARCHAR(20),
+    @Contrasena VARCHAR(MAX),
     @ID_Ciudad INT
 
 AS
 BEGIN
 Begin try 
 Begin TRAN
-    INSERT INTO USUARIO ( Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email, Contrasena, ID_Ciudad ) VALUES ( @Nickname, @Nombre, @Apellidos, @Sexo, @Fecha_Nacimiento, @Email, @Contrasena, @ID_Ciudad )
-    INSERT INTO LOGRO_USUARIO (Nickname,ID_Logro,Fecha) VALUES (@Nickname, 8, GETDATE())
+    SET NOCOUNT OFF;
+    INSERT INTO USUARIO ( Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email, Contrasena, ID_Ciudad )
+    VALUES (@Nickname, @Nombre, @Apellidos, @Sexo, @Fecha_Nacimiento, @Email, ENCRYPTBYPASSPHRASE('contrasena', @Contrasena), @ID_Ciudad)
+    IF @@ROWCOUNT>0
+        INSERT INTO LOGRO_USUARIO (Nickname,ID_Logro,Fecha) VALUES (@Nickname, 8, GETDATE())
 COMMIT TRAN 
-End try 
+End try
     Begin CATCH
         IF @@TRANCOUNT>0
         ROLLBACK TRANSACTION
     End CATCH
 END
-
 GO
 -- ===========================================================================================
 -- Descripción: Mandar solicitud de amistad a un Usuario
 -- ===========================================================================================
-CREATE PROCEDURE SP_SolicitudAmistad
+CREATE PROCEDURE USP_SolicitudAmistad
     @Nickname1 NVARCHAR(35),
 	@Nickname2 NVARCHAR(35)
 AS
@@ -87,7 +89,7 @@ GO
 -- ===========================================================================================
 -- Descripción: Mostrar el porcentaje que lleva realizado un usuario en cada logro
 -- ===========================================================================================
-CREATE PROCEDURE SP_AvanceLogros
+CREATE PROCEDURE USP_AvanceLogros
     @Nickname varchar(30)
 AS
 BEGIN
@@ -117,7 +119,7 @@ GO
 -- ===========================================================================================
 -- Descripción: Busca cualquier palabra ingresada por toda la base de datos
 -- ===========================================================================================
-CREATE PROC SP_BuscadorGenerico
+CREATE PROC USP_BuscadorGenerico
     @StrValorBusqueda nvarchar(100)
 AS
 BEGIN
@@ -164,13 +166,4 @@ WHILE @NombreTabla IS NOT NULL
      END
      SELECT NombreColumna, ValorColumna FROM #Resultado
 END
-GO
--- ===========================================================================================
---  Descripción: Encriptar contraseña de usuarios
--- ===========================================================================================
-create trigger triEncriptarContrasena ON Usuario INSTEAD OF INSERT
-AS
-    INSERT INTO USUARIO
-    SELECT Nickname, Nombre, Apellidos, Sexo, Fecha_Nacimiento, Email,ENCRYPTBYPASSPHRASE('Contraseña',Contrasena), ID_Ciudad FROM inserted
-
 GO

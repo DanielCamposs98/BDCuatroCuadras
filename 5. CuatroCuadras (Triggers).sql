@@ -6,11 +6,13 @@ GO
 CREATE TRIGGER TR_Amigos_SugerirAmigos ON Amigo
 AFTER INSERT
  AS
+    DECLARE @Nickname1 NVARCHAR(35) = (SELECT Nickname1 FROM inserted)
+    DECLARE @Nickname2 NVARCHAR(35) = (SELECT Nickname2 FROM inserted)
     DECLARE @AmigosSugeridos TABLE(
         Nickname VARCHAR(max)
     )
 
-    INSERT INTO @AmigosSugeridos EXEC usp_AmigosEnComun
+    INSERT INTO @AmigosSugeridos EXEC USP_AmigosEnComun @Nickname1, @Nickname2
 
     SELECT TOP(3)* FROM @AmigosSugeridos
 
@@ -209,5 +211,9 @@ AS
          IF(SELECT COUNT(*) FROM CATEGORIA WHERE ID_Categoria=@ID_Categoria)>0
             INSERT INTO LOGRO  SELECT Nombre,Descripcion,Cantidad_Visitas,Tipo_Categoria,Tipo_Etiqueta,Disponibilidad FROM inserted
     END
-GO
 
+    IF @ID_Categoria IS NULL AND @ID_Etiqueta IS NULL
+    BEGIN
+        INSERT INTO LOGRO  SELECT Nombre,Descripcion,Cantidad_Visitas,Tipo_Categoria,Tipo_Etiqueta,Disponibilidad FROM inserted
+    END
+GO

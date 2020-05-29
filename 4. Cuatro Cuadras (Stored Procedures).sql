@@ -183,3 +183,4 @@ BEGIN
 					Select Nickname2,Nickname1 FROM AMIGO
 					WHERE Nickname2=@Nickname1 and estado='A' ) as T1)
 END
+GO

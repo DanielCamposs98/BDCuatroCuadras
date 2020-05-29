@@ -167,3 +167,19 @@ WHILE @NombreTabla IS NOT NULL
      SELECT NombreColumna, ValorColumna FROM #Resultado
 END
 GO
+
+-- ===========================================================================================
+-- Descripción: 
+-- ===========================================================================================
+CREATE PROCEDURE USP_AmigosSugeridos
+    @Nickname1 NVARCHAR(35)
+AS
+BEGIN
+    Select TOP 5 Nickname from USUARIO WHERE Nickname <> @Nickname1 and Nickname NOT IN(
+				Select Nickname2 from (
+					Select Nickname1,Nickname2 FROM AMIGO 
+					WHERE Nickname1=@Nickname1 and estado='A'
+					UNION
+					Select Nickname2,Nickname1 FROM AMIGO
+					WHERE Nickname2=@Nickname1 and estado='A' ) as T1)
+END

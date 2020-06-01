@@ -90,7 +90,7 @@ GO
 -- Descripción: Mostrar el porcentaje que lleva realizado un usuario en cada logro
 -- ===========================================================================================
 CREATE PROCEDURE USP_AvanceLogros
-    @Nickname varchar(30)
+    @Nickname varchar(35)
 AS
 BEGIN
     Select U.Nickname, L1.Nombre,L1.Cantidad_Visitas,COUNT(*) as [Visitas Realizadas], ((100/L1.Cantidad_Visitas)*COUNT(*)) as Porcentaje from VISITA V 

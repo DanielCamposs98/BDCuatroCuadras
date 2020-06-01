@@ -178,9 +178,9 @@ BEGIN
     Select TOP 5 Nickname from USUARIO WHERE Nickname <> @Nickname1 and Nickname NOT IN(
 				Select Nickname2 from (
 					Select Nickname1,Nickname2 FROM AMIGO 
-					WHERE Nickname1=@Nickname1 and estado='A'
+					WHERE Nickname1=@Nickname1 and (estado='A' OR estado='P')
 					UNION
 					Select Nickname2,Nickname1 FROM AMIGO
-					WHERE Nickname2=@Nickname1 and estado='A' ) as T1)
+					WHERE Nickname2=@Nickname1 and (estado='A' OR estado='P')) as T1)
 END
 GO

@@ -212,3 +212,13 @@ AS
         INSERT INTO LOGRO  SELECT Nombre,Descripcion,Cantidad_Visitas,Tipo_Categoria,Tipo_Etiqueta,Disponibilidad FROM inserted
     END
 GO
+exec sp_help 'Usuario'
+GO
+CREATE TRIGGER TR_actualizaDatos ON USUARIO FOR UPDATE
+AS
+    UPDATE USUARIO 
+        SET Contrasena=(SELECT ENCRYPTBYPASSPHRASE('contrasena',Contrasena) FROM inserted)
+        WHERE Nickname=(SELECT Nickname FROM inserted)
+GO
+
+
